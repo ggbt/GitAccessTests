@@ -1,0 +1,2068 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+	<!-- Simple type for reuse of ExcludeFrom values 8/12/2011 -->
+	<xs:simpleType name="ExcludeFromValues">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Print"/>
+			<xs:enumeration value="Web"/>
+			<xs:enumeration value="PDA"/>
+			<xs:enumeration value="PrintandWeb"/>
+			<xs:enumeration value="PrintandPDA"/>
+			<xs:enumeration value="WebandPDA"/>
+			<xs:enumeration value="All"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Declarations for CALS tables 7/27/2011 -->
+	<xs:element name="title">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="IndexMarker"/>
+				<xs:element ref="Image"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID" use="required"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title" minOccurs="0"/>
+				<xs:choice>
+					<xs:element ref="tgroup" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="frame">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="all"/>
+						<xs:enumeration value="none"/>
+						<xs:enumeration value="topbot"/>
+						<xs:enumeration value="sides"/>
+						<xs:enumeration value="bottom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="colsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="rowsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="tabstyle">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1colSIDE"/>
+						<xs:enumeration value="DrugFullPage"/>
+						<xs:enumeration value="DrugHalfPage"/>
+						<xs:enumeration value="FigureFullPage"/>
+						<xs:enumeration value="FigureHalfPage"/>
+						<xs:enumeration value="FullPage"/>
+						<xs:enumeration value="MedicalTerms"/>
+						<xs:enumeration value="SidebarFullPage"/>
+						<xs:enumeration value="SidebarHalfPage"/>
+						<xs:enumeration value="Table"/>
+						<xs:enumeration value="TableFullPage"/>
+						<xs:enumeration value="TableHalfPage"/>
+						<xs:enumeration value="TableOneColumn"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tgroup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="colspec" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="spanspec" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="thead" minOccurs="0"/>
+				<xs:element ref="tfoot" minOccurs="0"/>
+				<xs:element ref="tbody"/>
+			</xs:sequence>
+			<xs:attribute name="cols" use="required"/>
+			<xs:attribute name="tgroupstyle"/>
+			<xs:attribute name="colsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="rowsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="align">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="right"/>
+						<xs:enumeration value="center"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="char"/>
+						<xs:enumeration value="justify"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="char"/>
+			<xs:attribute name="charoff"/>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="colspec">
+		<xs:complexType>
+			<xs:attribute name="colnum"/>
+			<xs:attribute name="colname"/>
+			<xs:attribute name="colwidth"/>
+			<xs:attribute name="colsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="rowsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="align">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="right"/>
+						<xs:enumeration value="center"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="char"/>
+						<xs:enumeration value="justify"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="char"/>
+			<xs:attribute name="charoff"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="spanspec">
+		<xs:complexType>
+			<xs:attribute name="namest" use="required"/>
+			<xs:attribute name="nameend" use="required"/>
+			<xs:attribute name="spanname" use="required"/>
+			<xs:attribute name="colsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="rowsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="align">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="right"/>
+						<xs:enumeration value="center"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="char"/>
+						<xs:enumeration value="justify"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="char"/>
+			<xs:attribute name="charoff"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="thead">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="colspec" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="row" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="valign">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="bottom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tfoot">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="colspec" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="row" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="valign">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="bottom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tbody">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="row" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="valign">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="bottom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="row">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="entry" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="rowsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="valign">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="bottom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="entry">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="Para"/>
+				<xs:element ref="Image"/>
+				<xs:element ref="List"/>
+				<xs:element ref="TableHead1"/>
+				<xs:element ref="TableHead2"/>
+				<xs:element ref="Multimedia"/>
+				<xs:element ref="ExternalContent"/>
+			</xs:choice>
+			<xs:attribute name="colname"/>
+			<xs:attribute name="namest"/>
+			<xs:attribute name="nameend"/>
+			<xs:attribute name="spanname"/>
+			<xs:attribute name="morerows"/>
+			<xs:attribute name="colsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="rowsep">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="align">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="right"/>
+						<xs:enumeration value="center"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="char"/>
+						<xs:enumeration value="justify"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="char"/>
+			<xs:attribute name="charoff"/>
+			<xs:attribute name="rotate">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="0"/>
+						<xs:enumeration value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="valign">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="bottom"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Heading Text and "Section Front Matter" Elements-->
+	<!--Section: The Section element begins the main FrameMaker files within the
+	 book. A section is made up of chapters, which use the Chapter element below.
+	 In FrameMaker, a Section element includes a number and title, a
+	 cross-reference set (showing as a contents list), and multiple chapters. In
+	 addition to the numbered sections of MMHE2 (1-25), there are sections
+	 dedicated to: "Resources", "About" and "Appendixes".-->
+	<xs:element name="Section">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Contents"/>
+				<xs:element ref="Chapter" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Type" default="section">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="section"/>
+						<xs:enumeration value="resources"/>
+						<xs:enumeration value="appendixes"/>
+						<xs:enumeration value="about"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Chapter: The Chapter element holds a chapter of a Merck Manual. Within the
+	 chapter are multiple D_Head elements. In FrameMaker, a Chapter element
+	 includes a number and title, similar to the Section element. Additionally, a
+	 Chapter element includes optional Para element(s) and D_Head element(s). The
+	 Attribute "ResourcesNavigation" lets the content author decide if this
+	 particular chapter should be shown, hidden or show the titles of it's children
+	 instead of it's own title in the navigation (left hand) menu.-->
+	<xs:element name="Chapter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="D_Head" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="NewInVersion">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="MMHE2"/>
+						<xs:enumeration value="MM18"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ResourcesNavigation" default="Show">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Show"/>
+						<xs:enumeration value="Hide"/>
+						<xs:enumeration value="ExpandChildren"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Type" default="chapter">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="chapter"/>
+						<xs:enumeration value="cp"/>
+						<xs:enumeration value="multimedia"/>
+						<xs:enumeration value="pronunciations"/>
+						<xs:enumeration value="ap"/>
+						<xs:enumeration value="front"/>
+						<xs:enumeration value="updates"/>
+						<xs:enumeration value="links"/>
+            <xs:enumeration value="onepage"/>
+          </xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+			<xs:attribute name="Topic_Type" default="Standard">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Standard"/>
+						<xs:enumeration value="ConsumerBasic"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--Title: The Title element is used for multiple levels of headings within
+	 this structure setup. In FrameMaker, the Title element automatically formats
+	 according to its parent element. The optional attribute ResourceTitle is
+	 provided so that titles for non-printable resource sections (i.e., multimedia,
+	 pronunciations, etc...) can be entered in the main FrameMaker book. The
+	 attribute AternateTitle is for the Japanese version of the MMHE2- -to support
+	 Katakana/Hiragana equivalents for Kanji Titles.-->
+	<xs:element name="Title">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="IndexMarker"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID" use="required"/>
+			<xs:attribute name="ResourceTitle"/>
+			<xs:attribute name="AlternateTitle"/>
+			<xs:attribute name="edition"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Contents: The Contents element is designed to be used in two locations: (1)
+	 in a Merck Manual element to "wrap" around the FrameMaker TOC's
+	 BOOK_COMPONENT, and (2) in a Section element to contain the List of
+	 cross-references which act as a mini-TOC for the Section. (TOC is short for
+	 Table of Contents.)-->
+	<xs:element name="Contents">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="List"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--D_Head: The D_Head elements are used inside a Chapter parent element. These
+	 are available to divide the chapter into logical chunks for easier reading.
+	 D_Head elements may contain E_Head elements, F_Head elements, or even jump
+	 direction to G_Head. The same format for the RevisionDate and Modification
+	 Date should be used here- -YYYYMMDD. RevisionDate is the date that the D_Head
+	 was last fully reviewed & revised. ModificationDate is the last time any
+	 change was made in the D_Head. (H1 in MMHE2 HTML) 10/27/03 - changed + to *
+	 for all head elements to more accurately reflect structure of book (see pg.
+	 970, Causes - Drugs:) The attribute Symptom allows a unique symptom to be
+	 associated with any D_Head. The attribute Description corresponds to the HTML
+	 description meta-tag (for search engine optimization). The attribute
+	 OptimizedTitle allows for customization of the HTML HEAD TITLE (but does not
+	 affect the title elsewhere).-->
+	<xs:element name="D_Head">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Keywords" minOccurs="0"/>
+				<xs:element ref="Symptom" minOccurs="0"/>
+				<xs:element ref="Emergency" minOccurs="0"/>
+				<xs:element ref="Injury" minOccurs="0"/>
+				<xs:element ref="ControlledVocabulary" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Essentials" minOccurs="0"/>
+				<xs:element ref="Synonym" minOccurs="0"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Para"/>
+					<xs:element ref="IllustrativeMaterial"/>
+					<xs:element ref="List"/>
+					<xs:element ref="NumberedEquation"/>
+					<xs:element ref="IndexMarker"/>
+					<xs:element ref="Multimedia"/>
+					<xs:element ref="ExternalContent"/>
+					<xs:element ref="Participant"/>
+					<xs:element ref="ResourceForHelp"/>
+					<xs:element ref="AnatomicalDrawing"/>
+					<xs:element ref="SpecialMaterial"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="E_Head"/>
+					<xs:element ref="F_Head"/>
+					<xs:element ref="G_Head"/>
+					<xs:element ref="H_Head"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ModificationDate"/>
+			<xs:attribute name="SortOverride"/>
+			<xs:attribute name="Description"/>
+			<xs:attribute name="OptimizedTitle"/>
+			<xs:attribute name="DictionaryWord"/>
+			<xs:attribute name="Type"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--E_Head: The E_Head element allows an optional subgrouping within D_Head
+	 information. Authors may skip this and move directly from a D_Head element
+	 into F_Head elements. (H2 in MMHE2 HTML)-->
+	<xs:element name="E_Head">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="ControlledVocabulary" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Essentials" minOccurs="0"/>
+				<xs:element ref="Synonym" minOccurs="0"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Para"/>
+					<xs:element ref="IllustrativeMaterial"/>
+					<xs:element ref="List"/>
+					<xs:element ref="NumberedEquation"/>
+					<xs:element ref="IndexMarker"/>
+					<xs:element ref="Multimedia"/>
+					<xs:element ref="ExternalContent"/>
+					<xs:element ref="Participant"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="F_Head"/>
+					<xs:element ref="G_Head"/>
+					<xs:element ref="H_Head"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--F_Head: The F_Head element is used within a E_Head element, and sometimes
+	 directly within a D_Head element. (H3 in HTML)-->
+	<xs:element name="F_Head">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Essentials" minOccurs="0"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Para"/>
+					<xs:element ref="IllustrativeMaterial"/>
+					<xs:element ref="List"/>
+					<xs:element ref="NumberedEquation"/>
+					<xs:element ref="IndexMarker"/>
+					<xs:element ref="Multimedia"/>
+					<xs:element ref="ExternalContent"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="G_Head"/>
+					<xs:element ref="H_Head"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Type_Home">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Causes"/>
+						<xs:enumeration value="Symptoms"/>
+						<xs:enumeration value="Diagnosis"/>
+						<xs:enumeration value="Further"/>
+						<xs:enumeration value="KeyPoints"/>
+						<xs:enumeration value="Prevention"/>
+						<xs:enumeration value="Treatment"/>
+						<xs:enumeration value="Prognosis"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Type_Pro">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Classification"/>
+						<xs:enumeration value="Complications"/>
+						<xs:enumeration value="Diagnosis"/>
+						<xs:enumeration value="Epidemiology"/>
+						<xs:enumeration value="Etiology"/>
+						<xs:enumeration value="Evaluation"/>
+						<xs:enumeration value="Further"/>
+						<xs:enumeration value="KeyPoints"/>
+						<xs:enumeration value="Pathology"/>
+						<xs:enumeration value="Pathophysiology"/>
+						<xs:enumeration value="Prevention"/>
+						<xs:enumeration value="Prognosis"/>
+						<xs:enumeration value="RiskFactors"/>
+						<xs:enumeration value="SymptomsAndSigns"/>
+						<xs:enumeration value="Treatment"/>
+						<xs:enumeration value="Other"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--G_Head: The G_Head element may be used within a parent F_Head, or directly
+	 within a D_Head. (H4 in MMHE2 HTML)-->
+	<xs:element name="G_Head">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Para"/>
+					<xs:element ref="IllustrativeMaterial"/>
+					<xs:element ref="List"/>
+					<xs:element ref="NumberedEquation"/>
+					<xs:element ref="IndexMarker"/>
+					<xs:element ref="Multimedia"/>
+					<xs:element ref="ExternalContent"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="H_Head"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--H_Head: This H_Head element is the last head level (class="runin" in MMHE2
+	 HTML)-->
+	<xs:element name="H_Head">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Para"/>
+					<xs:element ref="IllustrativeMaterial"/>
+					<xs:element ref="List"/>
+					<xs:element ref="NumberedEquation"/>
+					<xs:element ref="IndexMarker"/>
+					<xs:element ref="Multimedia"/>
+					<xs:element ref="ExternalContent"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--List: The List element contains ListItem child elements. A list can be used
+	 within a Contents element, inside a TableCell element, or directly within a
+	 Para element. 10/27 - Added back Unnumbered to support the sidebar nested
+	 lists on MMHE2 pg 63, 134.-->
+	<xs:element name="List">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title" minOccurs="0"/>
+				<xs:element ref="ListItem" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Bulleted"/>
+						<xs:enumeration value="Numbered"/>
+						<xs:enumeration value="Unnumbered"/>
+						<xs:enumeration value="Contents"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--ListItem: 11/13 - Modified to restart list numbering if list starts with
+	 <Title> element.-->
+	<xs:element name="ListItem">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="List"/>
+				<xs:element ref="Para"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Para: The Para element is used within many levels of elements. In all
+	 contexts, it uses a "Para" paragraph format. The Para element may contain many
+	 child elements, including text range elements used to apply character formats
+	 to words and phrases. The Para element also child elements of the marker type,
+	 such as the IndexMarker element.-->
+	<xs:element name="Para">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="XRef_Foot"/>
+				<xs:element ref="Definition"/>
+				<xs:element ref="DefinedTerm"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="IndexMarker"/>
+				<xs:element ref="NumberedEquation"/>
+				<xs:element ref="Note"/>
+				<xs:element ref="Caution"/>
+				<xs:element ref="Synonym"/>
+				<xs:element ref="Link"/>
+				<xs:element ref="LinkList"/>
+				<xs:element ref="RefWord"/>
+				<xs:element ref="GenericDrug"/>
+				<xs:element ref="ParaConcept"/>
+				<xs:element ref="Image"/>
+				<xs:element ref="MMXRefWord"/>
+				<xs:element ref="PublicationTitle"/>
+				<xs:element ref="GlossaryTerm"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID" use="required"/>
+			<xs:attribute name="Indent" default="0"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--GlossaryDefinition: For use within SpecialMaterial tables with
+	 @SpecialType_Pet set to Glossary. The @Term will be used to autotag the terms
+	 with this definition as the rollover.-->
+	<xs:element name="GlossaryDefinition">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Term" use="required"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--GlossaryTerm: When auto-tagging (rollover) of a term found in the Glossary
+	 is not desired, wrap the term with GlossaryTerm and set ShowLink to False-->
+	<xs:element name="GlossaryTerm">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ShowLink" default="False">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="False"/>
+						<xs:enumeration value="True"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--Definition: Definition elements are used inside heading-like elements. They
+	 may contain the DefinedTerm element or contain text. The resulting content
+	 will be italicized.-->
+	<xs:element name="Definition">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="DefinedTerm"/>
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="IndexMarker"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--PublicationTitle: The PublicationTitle element may be used for terms that
+	 authors wish to have italic. PublicationTitle is allowed inside the Para
+	 element.-->
+	<xs:element name="PublicationTitle">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--DefinedTerm: The DefinedTerm element may be used for terms that authors
+	 wish to have bolded. DefinedTerm is allowed inside the Definition element, and
+	 within a Para element.
+	-->
+	<xs:element name="DefinedTerm">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Image: The anchored frame for a graphic. -->
+	<xs:element name="Image">
+		<xs:complexType>
+			<xs:attribute name="UniqueID" use="required"/>
+			<xs:attribute name="AuthorAction" default="Import">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Import"/>
+						<xs:enumeration value="Paste"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="HighRes" default="Yes">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="GifSize" default="Large">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Small"/>
+						<xs:enumeration value="Large"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ImageDesc" default="No description provided."/>
+			<xs:attribute name="File"/>
+			<xs:attribute name="DPI"/>
+			<xs:attribute name="RasterDPI"/>
+			<xs:attribute name="Alt"/>
+			<xs:attribute name="Impsize" use="required"/>
+			<xs:attribute name="ImpBy">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Ref"/>
+						<xs:enumeration value="Copy"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Sideways"/>
+			<xs:attribute name="ImpAng"/>
+			<xs:attribute name="XOffset"/>
+			<xs:attribute name="YOffset"/>
+			<xs:attribute name="Position"/>
+			<xs:attribute name="Align"/>
+			<xs:attribute name="Cropped"/>
+			<xs:attribute name="Float"/>
+			<xs:attribute name="Width" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="Height" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="Angle"/>
+			<xs:attribute name="BlOffset"/>
+			<xs:attribute name="NsOffset"/>
+			<xs:attribute name="SrcFile"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+			<xs:attribute name="Restricted" default="No">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Type_MM">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Procedure"/>
+						<xs:enumeration value="Exam"/>
+						<xs:enumeration value="Infographic"/>
+						<xs:enumeration value="Rehab"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--AnatomicalDrawing: The Image is the high-resolution image for the printable
+	 book, and will have the same file name as used for the web version of the
+	 image; the thumbnail will be named tn_-->
+	<xs:element name="AnatomicalDrawing">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Image"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--IllustrativeMaterial: This IllustrativeMaterial element is valid as both a
+	 sibling and child of Para. It was necessary to allow IllustrativeMaterial as a
+	 child of Para to enable pagination of the printed book. In general, even
+	 though allowed by the DTD, IllustrativeMaterial should not appear in Para
+	 outside of any head levels. We have made text formatting rules to alert users
+	 who attempt to put IllustrativeMaterial in these areas. Within a single
+	 D_Head, a user can position a piece of IllustrativeMaterial in one place but
+	 have it appear after a specific Para (in that same D_Head) on the web by
+	 putting that Para's unique ID in the attribute @ParaID. If more than one piece
+	 of IllustrativeMaterial has the same @ParaID, then the attribute @SortOrder
+	 should be used to specify the order of the IllustrativeMaterial. For all
+	 intents and purposes, "DidYouKnow" and "SpotlightOnAging" will be processed by
+	 transforms the same way as "Sidebar".-->
+	<xs:element name="IllustrativeMaterial">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IndexMarker" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:choice>
+					<xs:element ref="Table"/>
+					<xs:element ref="table"/>
+				</xs:choice>
+				<xs:element ref="Credits" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Width" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="FullPage"/>
+						<xs:enumeration value="HalfPage"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Table"/>
+						<xs:enumeration value="Figure"/>
+						<xs:enumeration value="Sidebar"/>
+						<xs:enumeration value="DidYouKnow"/>
+						<xs:enumeration value="SpotlightOnAging"/>
+						<xs:enumeration value="DrugTable"/>
+						<xs:enumeration value="PearlsAndPitfalls"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="NewInVersion">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="MM18"/>
+						<xs:enumeration value="MMHE2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ParaID"/>
+			<xs:attribute name="SortOrder"/>
+			<xs:attribute name="PDF"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SpecialMaterial: This SpecialMaterial works like IllustrativeMaterial, but
+	 is suited for the "1-off" cases. For MMHE2, the choice "DrugNameTrade" and
+	 "DrugNameGeneric" should be used for the "Some Trade Names of Generic Drugs"
+	 and "Generic Names for Some Trade Name Drugs" tables in Appendix 3. These two
+	 tables get exported into a new data structure which is used to power the drug
+	 roll-overs seen on topic pages. SpecialType_Pet with Glossary allows us to
+	 identify a table that will contain glossary definitions for the MMM-PH.-->
+	<xs:element name="SpecialMaterial">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="Table"/>
+					<xs:element ref="table"/>
+				</xs:choice>
+				<xs:element ref="Credits" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="SpecialType_Home">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="MedicalTerms"/>
+						<xs:enumeration value="DrugNameTrade"/>
+						<xs:enumeration value="DrugNameGeneric"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="SpecialType_Pro">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="PediatricResucitation"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="SpecialType_Pet">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Glossary"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Table: This Table element is a FrameMaker Table-type element. When
+	 inserted, it opens the Insert Table dialog and allows authors to select a
+	 table format (though one is selected for them) and type in the number of
+	 columns and rows needed.-->
+	<xs:element name="Table">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TableTitle" minOccurs="0"/>
+				<xs:element ref="TableHeading" minOccurs="0"/>
+				<xs:element ref="TableBody"/>
+				<xs:element ref="TableFooting" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Cols"/>
+			<xs:attribute name="Widths"/>
+			<xs:attribute name="Colsep"/>
+			<xs:attribute name="Rowsep"/>
+			<xs:attribute name="Frame"/>
+			<xs:attribute name="Tabstyle">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="1colSIDE"/>
+						<xs:enumeration value="DrugFullPage"/>
+						<xs:enumeration value="DrugHalfPage"/>
+						<xs:enumeration value="FigureFullPage"/>
+						<xs:enumeration value="FigureHalfPage"/>
+						<xs:enumeration value="FullPage"/>
+						<xs:enumeration value="MedicalTerms"/>
+						<xs:enumeration value="SidebarFullPage"/>
+						<xs:enumeration value="SidebarHalfPage"/>
+						<xs:enumeration value="Table"/>
+						<xs:enumeration value="TableFullPage"/>
+						<xs:enumeration value="TableHalfPage"/>
+						<xs:enumeration value="TableOneColumn"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--TableTitle: TableTitle: the table title. May not be used by any of the main
+	 table formats, but provided for potential use. Will only work with Table
+	 Formats that have a Table Title set for above or below the table.-->
+	<xs:element name="TableTitle">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Title"/>
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Image"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--TableHeading: THeading: the heading portion of a table. Wraps around
+	 heading rows to ensure FrameMaker treats them as heading rows and has them
+	 repeat on all pages of a continued table.-->
+	<xs:element name="TableHeading">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TableRow" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--TableRow: TRow: the basic building block of a table. Rows contain as many
+	 cells as there are columns.-->
+	<xs:element name="TableRow">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TableCell" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Rowsep"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- TableBody: TBody: the body portion of a table. -->
+	<xs:element name="TableBody">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TableRow" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--TableCell: TCell: individual cell contents of a table. 11/13/03 - -
+	 modified to reset list counter to zero.-->
+	<xs:element name="TableCell">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="Para"/>
+				<xs:element ref="Title"/>
+				<xs:element ref="Image"/>
+				<xs:element ref="List"/>
+				<xs:element ref="Multimedia"/>
+				<xs:element ref="ExternalContent"/>
+				<xs:element ref="TableHead1"/>
+				<xs:element ref="TableHead2"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Straddle"/>
+			<xs:attribute name="Vstraddle"/>
+		</xs:complexType>
+	</xs:element>
+	<!--TableFooting: TFooting: the footing portion of a table. This is an optional
+	 part of most tables and may not be used. If used, it will contain the footing
+	 rows of a table and have them repeat on all pages within FrameMaker.-->
+	<xs:element name="TableFooting">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="TableRow" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TableHead1">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Title"/>
+				<xs:element ref="Para"/>
+				<xs:element ref="List"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TableHead2">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Title"/>
+				<xs:element ref="Para"/>
+				<xs:element ref="List"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="XRef_Foot">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="CondPhrase"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- ExternalContent: Next constructs (March, 2012) to support MC+CALC Calculators -->
+	<xs:element name="ExternalContent">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="ExternalURL"/>
+				<xs:element ref="Thumbnail" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="Type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Calculator"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+      <xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+    </xs:complexType>
+	</xs:element>
+	<xs:element name="ExternalURL">
+		<xs:complexType>
+			<xs:attribute name="URL" use="required"/>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Thumbnail">
+		<xs:complexType>
+			<xs:attribute name="File" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Multimedia: The Multimedia child element is at the Resource level. -->
+	<xs:element name="Multimedia">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="Para"/>
+					<xs:element ref="List"/>
+				</xs:choice>
+				<xs:element ref="Credits" minOccurs="0"/>
+				<xs:element ref="Source" minOccurs="0"/>
+				<xs:element ref="MediaURL" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="Type" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Animation"/>
+						<xs:enumeration value="Audio"/>
+						<xs:enumeration value="Photo"/>
+						<xs:enumeration value="Video"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+			<xs:attribute name="VideoID"/>
+			<xs:attribute name="PlayerID"/>
+			<xs:attribute name="Alt"/>
+			<xs:attribute name="Restricted" default="No">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Yes"/>
+						<xs:enumeration value="No"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Type_MM">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Procedure"/>
+						<xs:enumeration value="Exam"/>
+						<xs:enumeration value="Infographic"/>
+						<xs:enumeration value="Rehab"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom_Lang"/>
+		</xs:complexType>
+	</xs:element>
+	<!--MMXRefWord: Specifies the in-book positioning of Multimedia (which lives in
+	 another file)- -Differs from MMXRef because this one lives within Para and
+	 surrounds text which should get hyperlinked and followed by a multimedia icon
+	 of the appropriate type.-->
+	<xs:element name="MMXRefWord">
+		<xs:complexType mixed="true">
+			<xs:attribute name="IDRef" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--MediaURL: Format and bandwidth are required choices when type video is
+	 selected.-->
+	<xs:element name="MediaURL">
+		<xs:complexType mixed="true">
+			<xs:attribute name="Format" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Real"/>
+						<xs:enumeration value="Windows"/>
+						<xs:enumeration value="Flash"/>
+						<xs:enumeration value="Image"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Bandwidth">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Low"/>
+						<xs:enumeration value="Medium"/>
+						<xs:enumeration value="High"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="URL" use="required"/>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Credits">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Para" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--URL: This exists only for "resources for help and information" (MMHE2); you
+	 should now use "Link" to create hyperlinks.-->
+	<xs:element name="URL">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="XLink">
+		<xs:complexType mixed="true">
+			<xs:attribute name="IDRef"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="XRef">
+		<xs:complexType>
+			<xs:attribute name="IDRef"/>
+			<xs:attribute name="Format">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="see page"/>
+						<xs:enumeration value="see heading on page"/>
+						<xs:enumeration value="see table"/>
+						<xs:enumeration value="see figure"/>
+						<xs:enumeration value="see sidebar"/>
+						<xs:enumeration value="see chapter"/>
+						<xs:enumeration value="see also page"/>
+						<xs:enumeration value="see also heading on page"/>
+						<xs:enumeration value="page numonly"/>
+						<xs:enumeration value="table numonly"/>
+						<xs:enumeration value="figure numonly"/>
+						<xs:enumeration value="heading on page"/>
+						<xs:enumeration value="chapter on page"/>
+						<xs:enumeration value="in Chapter"/>
+						<xs:enumeration value="See page"/>
+						<xs:enumeration value="See heading on page"/>
+						<xs:enumeration value="See table"/>
+						<xs:enumeration value="See figure"/>
+						<xs:enumeration value="See sidebar"/>
+						<xs:enumeration value="See chapter"/>
+						<xs:enumeration value="See also page"/>
+						<xs:enumeration value="See also heading on page"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Filename"/>
+			<xs:attribute name="TargetDescription"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IndexMarker">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Bold"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="type"/>
+			<xs:attribute name="range">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="start"/>
+						<xs:enumeration value="end"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="nopage">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="yes"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="IndexMarker-ORIG">
+		<xs:complexType>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="type"/>
+			<xs:attribute name="text"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NumberedEquation">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title" minOccurs="0"/>
+				<xs:element ref="Equation"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Equation">
+		<xs:complexType>
+			<xs:attribute name="entity" type="xs:ENTITY"/>
+			<xs:attribute name="file"/>
+			<xs:attribute name="position" type="xs:NMTOKEN"/>
+			<xs:attribute name="align" type="xs:NMTOKEN"/>
+			<xs:attribute name="cropped" type="xs:NMTOKEN"/>
+			<xs:attribute name="float" type="xs:NMTOKEN"/>
+			<xs:attribute name="width"/>
+			<xs:attribute name="height"/>
+			<xs:attribute name="angle"/>
+			<xs:attribute name="bloffset"/>
+			<xs:attribute name="nsoffset"/>
+			<xs:attribute name="dpi" type="xs:NMTOKEN"/>
+			<xs:attribute name="alt"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Bold">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="IndexMarker"/>
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Link"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="GenericDrug"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ParaConcept">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Essentials: Essentials was added for the Geriatrics book, to allow an
+	 optional bulleted list under a title; valid under D, E and F heads-->
+	<xs:element name="Essentials">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Para" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Caution">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Italic"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Note">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Italic"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Gene: This element was added for MM18 and is not supported in MMHE2. -->
+	<xs:element name="Gene">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="IndexMarker"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Microorganism">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="IndexMarker"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Type" default="Normal">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Normal"/>
+						<xs:enumeration value="Special"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--ControlledVocabulary: Allows the association of different types of codes to
+	 D and E Head elements. This will not be displayed in print or online, but used
+	 by 3rd parties who receive XML content. Codes have different types (e.g.,
+	 ICD-9, etc...) and are generally codes or terms; the optional Term attribute
+	 can be used for things like the ICD-9 Term.-->
+	<xs:element name="ControlledVocabulary">
+		<xs:complexType>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Code" use="required"/>
+			<xs:attribute name="CodeType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="CPT"/>
+						<xs:enumeration value="DSM-IV"/>
+						<xs:enumeration value="HCPCS"/>
+						<xs:enumeration value="ICD-9"/>
+						<xs:enumeration value="ICD-10"/>
+						<xs:enumeration value="LOINC"/>
+						<xs:enumeration value="MeSH"/>
+						<xs:enumeration value="RxNorm"/>
+						<xs:enumeration value="SNOMED-CT"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Term"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Synonym">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Symbol"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Italic">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="IndexMarker"/>
+				<xs:element ref="SmallCaps"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Subscript">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="SubSubscript"/>
+				<xs:element ref="SmallCaps"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SubSubscript">
+		<xs:complexType mixed="true"/>
+	</xs:element>
+	<xs:element name="Superscript">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Symbol"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Symbol">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Superscript"/>
+			</xs:choice>
+			<xs:attribute name="Font">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Zapf"/>
+						<xs:enumeration value="SymbolGreek"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SmallCaps">
+		<xs:complexType mixed="true"/>
+	</xs:element>
+	<!--RefWord: RefWord allows content editors to assign a UniqueID to a
+	 particular word for the purpose of creating an accurate printed index. This
+	 solves the problem where a cross reference points to a Para that is split
+	 across two pages and then consequently provides the wrong page number in the
+	 index. This was added for MM18 and is not supported in MMHE2.-->
+	<xs:element name="RefWord">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--GenericDrug: GenericDrug allows the overriding of automatic tagging of
+	 Generic Drug names. When a drug is tagged with GenericDrug, the rollover will
+	 not appear on the website. This was added for MM18 and is supported in
+	 MMHE2.-->
+	<xs:element name="GenericDrug">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ShowRollover" default="False">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="False"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!--Manual: Manual is the highest level element, used to start a FrameMaker
+	 book. In XML it represents the highest level of information and contains the
+	 entire Merck Manual.-->
+	<xs:element name="Manual">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LandingPage"/>
+				<xs:element ref="TitlePage" maxOccurs="unbounded"/>
+				<xs:element ref="Copyright"/>
+				<xs:element ref="Contents"/>
+				<xs:element ref="Section" maxOccurs="unbounded"/>
+				<xs:element ref="Index"/>
+				<xs:element ref="Colophon"/>
+				<xs:element ref="Multimedia-List" minOccurs="0"/>
+				<xs:element ref="IllustrativeMaterial-List" minOccurs="0"/>
+				<xs:element ref="Pro-Words" minOccurs="0"/>
+				<xs:element ref="Site-Config"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LandingPage">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="LP_Intro" maxOccurs="unbounded"/>
+				<xs:element ref="LP_Editors"/>
+				<xs:element ref="LP_EditorialBoard"/>
+				<xs:element ref="Link" minOccurs="0"/>
+				<xs:element ref="LP_Editors" minOccurs="0"/>
+				<xs:element ref="LP_WhatsDifferent"/>
+				<xs:element ref="LP_Footer"/>
+				<xs:element ref="LP_New" minOccurs="0"/>
+				<xs:element ref="LP_Exclusive"/>
+				<xs:element ref="LP_Latest" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="LP_NavLinks" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_Intro">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Para" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Link" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_Editors">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Participant" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_EditorialBoard">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Participant" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- LinkList: Added for MM18, not supported in MMHE2. -->
+	<xs:element name="LinkList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Link" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Link: This is a link to a cross-reference or an external URL; if this is
+	 actually a link to something internal (for which there is no cross reference),
+	 or a re-named link (cross reference where you want different link text) you
+	 will want to set UseContext to True and omit the context name in the
+	 ExternalIURL attribute (this prevents the offsite link disclaimer). A
+	 cross-reference can be made to internal content, which includes content that
+	 is web-only (determined by book structure). Target specifies the HTML target
+	 (e.g., "_blank"). The Title of the link should be used for the href title
+	 attribute (for accessiblity) and the <TEXT> of the link should be the title
+	 you see on the screen.-->
+	<xs:element name="Link">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Title" use="required"/>
+			<xs:attribute name="IconStyle"/>
+			<xs:attribute name="IDRef"/>
+			<xs:attribute name="ExternalURL"/>
+			<xs:attribute name="UseContext">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="True"/>
+						<xs:enumeration value="False"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Target"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_WhatsDifferent">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Para" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_Footer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Para" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_New">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Para"/>
+				<xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_Exclusive">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_Latest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Para" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="LP_NavLinks">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="Para" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResourceForHelp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="SeeAlso" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="See" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ResourceRecord" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ResourceRecord">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+				<xs:element ref="ContactInfo" minOccurs="0"/>
+				<xs:element ref="URL" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SeeAlso">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="See">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Title"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ContactInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Para" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--TitlePage: This element will only appear in the printed book, and is not
+	 structured. Structure is only needed for Web-outputted items. Therefore, its
+	 General Rule (content model) allows TEXT.-->
+	<xs:element name="TitlePage">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Copyright: This element will only appear in the printed book, and is not
+	 structured. Structure is only needed for Web-outputted items. Therefore, its
+	 General Rule (content model) allows TEXT.-->
+	<xs:element name="Copyright">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Reviewers: Reviewers is a container for participants, exclusively for use
+	 within D_Head to allow for the customization of the D_Head last reviewed line
+	 on the website-->
+	<xs:element name="Reviewers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Participant" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Participant">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element ref="Role" minOccurs="0"/>
+				<xs:element ref="Degree" minOccurs="0"/>
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="JobTitle"/>
+					<xs:element ref="Affiliation"/>
+				</xs:sequence>
+				<xs:element ref="Specialty" minOccurs="0"/>
+				<xs:element ref="OrgName" minOccurs="0"/>
+				<xs:element ref="ChapNames" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="CV" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Name">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Role">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Degree">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="JobTitle">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Affiliation">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Specialty">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrgName">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ChapNames">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CV">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Index: This element will only appear in the printed book, and is not
+	 structured. Structure is only needed for Web-outputted items. Therefore, its
+	 General Rule (content model) allows TEXT.-->
+	<xs:element name="Index">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Colophon: This element will only appear in the printed book, and is not
+	 structured. Structure is only needed for Web-outputted items. Therefore, its
+	 General Rule (content model) allows TEXT.-->
+	<xs:element name="Colophon">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Multimedia-List: This element will not appear in the printed book; it is a
+	 container for all multimedia.-->
+	<xs:element name="Multimedia-List">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Multimedia" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--IllustrativeMaterial-List: This element will not appear in the printed
+	 book; it is a container for web-only IllustrativeMaterial. Added for MM18.-->
+	<xs:element name="IllustrativeMaterial-List">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="IllustrativeMaterial" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Pro-Words: This element will not appear in the printed book; it is a
+	 container for all pronounceable words.-->
+	<xs:element name="Pro-Words">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Pro-Word" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Site-Config: This element will not appear in the printed book; it is a
+	 container for all configuration strings for the Website.-->
+	<xs:element name="Site-Config">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Group" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<!--Group: This is a container for items (name value pairs) that appear in the
+	 site-config.-->
+	<xs:element name="Group">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Item" minOccurs="0"/>
+				<xs:element ref="Group" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Title" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Item: This is a name-value pair for the site-config strings -->
+	<xs:element name="Item">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Title" use="required"/>
+			<xs:attribute name="Type"/>
+			<xs:attribute name="Value" use="required"/>
+			<xs:attribute name="Media">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="True"/>
+						<xs:enumeration value="False"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<!-- Pro-Word: This is a pronounceable word -->
+	<xs:element name="Pro-Word">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="Asset" use="required"/>
+			<xs:attribute name="Word" use="required"/>
+			<xs:attribute name="Lookup" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- CondPhrase: Apply this tag to inline phrases that must be excluded from some form of output. Use the ExcludeFrom attribute to specify which output it should be excluded from. [Vasont Feb 2010] -->
+	<xs:element name="CondPhrase">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="Symbol"/>
+				<xs:element ref="Superscript"/>
+				<xs:element ref="Subscript"/>
+				<xs:element ref="Italic"/>
+				<xs:element ref="Bold"/>
+				<xs:element ref="SmallCaps"/>
+				<xs:element ref="Microorganism"/>
+				<xs:element ref="Gene"/>
+				<xs:element ref="XRef"/>
+				<xs:element ref="XLink"/>
+				<xs:element ref="Synonym"/>
+				<xs:element ref="Link"/>
+				<xs:element ref="RefWord"/>
+				<xs:element ref="GenericDrug"/>
+				<xs:element ref="DefinedTerm"/>
+				<xs:element ref="GlossaryTerm"/>
+				<xs:element ref="PublicationTitle"/>
+			</xs:choice>
+			<xs:attribute name="UniqueID"/>
+			<xs:attribute name="ExcludeFrom" type="ExcludeFromValues" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Source">
+		<xs:complexType>
+			<xs:attribute name="URL" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Keywords">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Keyword" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Keyword">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Symptom">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Emergency">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Injury">
+		<xs:complexType mixed="true">
+			<xs:attribute name="UniqueID"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
